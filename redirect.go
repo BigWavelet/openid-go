@@ -47,8 +47,10 @@ func BuildRedirectURL(opEndpoint, opLocalID, claimedID, returnTo, realm string) 
 	if len(realm) > 0 {
 		values.Add("openid.realm", realm)
 	}
-	
-	values.Add("openid.sreg.required", "nickname,email,fullname") // quick dirty patch
+
+	// ssx: quick dirty patch
+	values.Add("openid.ns.sreg", "http://openid.net/extensions/sreg/1.1")
+	values.Add("openid.sreg.required", "nickname,email,fullname")
 
 	if strings.Contains(opEndpoint, "?") {
 		return opEndpoint + "&" + values.Encode(), nil
